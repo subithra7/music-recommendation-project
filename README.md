@@ -1,5 +1,4 @@
 # music-recommendation-project
-# Music Recommendation Project
 
 This repo contains all the code.
 
