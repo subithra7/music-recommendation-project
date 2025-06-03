@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>🎶 Smart Music Recommender</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      padding: 30px;
+      color: #333;
+      text-align: center;
+    }
+    textarea {
+      width: 80%;
+      height: 100px;
+      padding: 12px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    #output {
+      margin-top: 30px;
+      text-align: left;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .song {
+      background: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+
+  <h1>🎶 Smart Music Recommender</h1>
+  <p>Enter a music request (e.g., "Give me a calm song like Blinding Lights")</p>
+  <textarea id="input"></textarea><br>
+  <button onclick="getRecommendations()">Recommend 🎧</button>
+
+
+  <div id="output"></div>
+
+
+  <script>
+    async function getRecommendations() {
+      const prompt = document.getElementById("input").value.trim();  // <== Fixed here
+      const outputDiv = document.getElementById("output");
+      outputDiv.innerHTML = "<p>⏳ Thinking...</p>";
+
+
+      try {
+        const res = await fetch("http://localhost:5000/recommend", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ prompt })   // uses the trimmed prompt
+        });
+
+
+        const data = await res.json();
+
+
+        if (data.recommendations) {
+          outputDiv.innerHTML = "";
+          data.recommendations.forEach((song, idx) => {
+            outputDiv.innerHTML += `
+              <div class="song"><strong>${idx + 1}. ${song.title}</strong> by <em>${song.artist}</em></div>
+            `;
+          });
+        } else {
+          outputDiv.innerHTML = `<p style="color:red;">⚠️ Error: ${data.error || "Could not parse response"}</p>`;
+          if (data.raw) {
+            outputDiv.innerHTML += `<pre>${data.raw}</pre>`;
+          }
+        }
+      } catch (err) {
+        outputDiv.innerHTML = `<p style="color:red;">⚠️ Network error or backend is down</p>`;
+        console.error(err);
+      }
+    }
+  </script>
+
+
+</body>
+</html>
