@@ -27,7 +27,7 @@ def get_spotify_info(track, artist):
     return None
 
 # === Load and scale dataset ===
-df = pd.read_csv(r"C:\Users\poorn\OneDrive\Desktop\internship\llm\dataset.csv")
+df = pd.read_csv("dataset.csv")
 audio_features = [
     "danceability", "energy", "valence", "tempo", "acousticness",
     "instrumentalness", "liveness", "speechiness"
