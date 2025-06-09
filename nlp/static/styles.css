@@ -1,0 +1,75 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #12121d);
+    color: #e0e0e0;
+    padding: 30px;
+    margin: 0;
+}
+h1 {
+    color: #00ffcc;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 700;
+}
+form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+input[type="text"] {
+    width: 60%;
+    padding: 12px 15px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 5px #00ffcc;
+    background-color: #29293d;
+    color: #e0e0e0;
+}
+input[type="submit"] {
+    padding: 12px 25px;
+    background-color: #00ffcc;
+    color: #12121d;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00ffcc;
+}
+.recommendation {
+    background-color: #2c2c3e;
+    padding: 20px;
+    margin: 15px auto;
+    border-radius: 12px;
+    max-width: 700px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 0 10px #00ffcc66;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+.recommendation:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px #00ffccaa;
+}
+.album-art {
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+.song-info {
+    flex-grow: 1;
+}
+.song-info strong {
+    font-size: 1.2em;
+    color: #00ffc2;
+}
+.song-info div {
+    margin: 6px 0;
+    font-size: 0.9em;
+    color: #b0f0e5;
+}
