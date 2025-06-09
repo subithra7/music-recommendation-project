@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Similar Songs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>🎶 Songs similar to: "{{ selected_song }}"</h1>
+    <div style="text-align: center;"><a href="/" style="color: #00ffcc;">← Back to search</a></div>
+
+    {% for song in results %}
+        <div class="recommendation">
+            <img class="album-art" src="{{ song.album_art }}" alt="Album Art">
+            <div class="song-info">
+                <strong>{{ song.track_name }}</strong>
+                <div>Artist: {{ song.artists }}</div>
+                <div>Genre: {{ song.track_genre }}</div>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
