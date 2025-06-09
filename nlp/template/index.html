@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Music Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>🎵 Music Recommendation System</h1>
+    <form method="POST" action="/recommend">
+        <input type="text" name="query" placeholder="Describe your mood or song preference..." required>
+        <input type="submit" value="Recommend Songs">
+    </form>
+
+    {% if results %}
+        <h2>Top Recommendations for: "{{ query }}"</h2>
+        {% for song in results %}
+            <div class="recommendation" onclick="location.href='/song/{{ song.track_name }}';">
+                <img class="album-art" src="{{ song.album_art }}" alt="Album Art">
+                <div class="song-info">
+                    <strong>{{ song.track_name }}</strong>
+                    <div>Artist: {{ song.artists }}</div>
+                    <div>Genre: {{ song.track_genre }}</div>
+                    <div><em>Click to view similar songs</em></div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
